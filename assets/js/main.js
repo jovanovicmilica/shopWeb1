@@ -44,8 +44,8 @@ function getHeader(){
 
 
 function getMenu(){
-    var menuNames=['Home','Man','Woman','About','Contact','Author']
-    var menuLinks=['index.html','man.html','woman.html','about.html','contact.html','author.html']
+    var menuNames=['Home','Men','Women','About','Contact','Author']
+    var menuLinks=['index.html','men.html','women.html','about.html','contact.html','author.html']
     let print=''
     print+=`<nav class="col-12 d-none"><ul class="text-end">`
     for(let i=0;i<menuNames.length;i++){
@@ -88,8 +88,10 @@ function getFooter(){
     var networksLinks=['https://www.facebook.com','https://www.instagram.com','https://www.youtube.com','https://www.twitter.com/']
 
     for(let i=0;i<networks.length;i++){
-        footerContact.innerHTML+=`<a class="px-3 py-2 me-2 rounded-circle bg-light border-1 text-dark fs-5" href="${networksLinks[i]}"><i class="fab ${networks[i]}"></i></a>`
+        footerContact.innerHTML+=`<a target="_blank" class="px-3 py-2 me-2 rounded-circle bg-light border-1 text-dark fs-5" href="${networksLinks[i]}"><i class="fab ${networks[i]}"></i></a>`
     }
+
+    footerContact.innerHTML+=`<br/><br/><a class="text-decoration-none text-dark" href="doc.pdf">Documentation</a>`
 }
 
 function showMenu(e){
@@ -97,10 +99,14 @@ function showMenu(e){
     if($("nav").hasClass("d-none")){
         $("nav").removeClass("d-none")
         $("#hamburger").html(`<i class="fas fa-times fs-4 mx-2"></i>`)
+        $("header").addClass("headerColor")
+        $("nav").addClass("headerColor")
     }
     else{
         $("nav").addClass("d-none")
         $("#hamburger").html(`<i class="fas fa-bars fs-4 mx-2"></i>`)
+        $("header").removeClass("headerColor")
+        $("nav").removeClass("headerColor")
     }
 }
 
@@ -153,25 +159,25 @@ $('.owl-carousel').owlCarousel({
 }
 
 ///top products
-var topProducts=['Product1','Product2','Product3','Product4']
-var topProductsImages=['product1.jpg','product4.jpg','product5.jpg','product7.jpg']
-var topProductsPrices=[55,44,66,88]
-var topProductsOldPrices=[66,null,null,100]
-var topProductRate=[5,5,3,2]
+var topProducts=['T-Shirt','Trousers','Jacket','T-Shirt']
+var topProductsImages=['product9.webp','product3.webp','product14.webp','product8.webp']
+var topProductsPrices=[25,35,50,20]
+var topProductsOldPrices=[35,null,null,30]
+var topProductRate=[5,3,3,4]
 
 ///men products
-var menProducts=['Product1','Product2','Product3','Product4','Product1','Product2','Product3','Product4']
-var menProductsImages=['product1.jpg','product4.jpg','product5.jpg','product7.jpg','product1.jpg','product4.jpg','product5.jpg','product7.jpg']
-var menProductsPrices=[55,44,66,88,55,44,66,88]
-var menProductsOldPrices=[66,null,null,100,66,null,null,100]
+var menProducts=['T-Shirt','Shorts','Jeans','Joggers','Hoodie','Jacket','Jeans','Hoodie']
+var menProductsImages=['product9.webp','product10.webp','product11.webp','product12.webp','product13.webp','product14.webp','product15.webp','product16.webp']
+var menProductsPrices=[25,20,66,30,20,44,30,20]
+var menProductsOldPrices=[35,null,null,45,30,45,null,30]
 var menProductRate=[5,5,3,2,5,5,3,2]
 
 
 ///woman products
-var womanProducts=['1','2','3','Product4','Product1','Product2','Product3','Product4']
-var womanProductsImages=['product1.jpg','product4.jpg','product5.jpg','product7.jpg','product1.jpg','product4.jpg','product5.jpg','product7.jpg']
-var womanProductsPrices=[55,44,66,88,55,44,66,88]
-var womanProductsOldPrices=[66,null,null,100,66,null,null,100]
+var womanProducts=['Sweatshirt','Jeans','Trousers ','Dress','T-Shirt','Leather Jacket','Jacket','T-Shirt']
+var womanProductsImages=['product1.webp','product2.webp','product3.webp','product4.webp','product5.webp','product6.webp','product7.webp','product8.webp']
+var womanProductsPrices=[55,44,35,50,15,60,40,20]
+var womanProductsOldPrices=[66,null,null,60,20,null,45,30]
 var womanProductRate=[5,5,3,2,5,5,3,2]
 
 
@@ -231,18 +237,18 @@ function addToCard(e){
     $(this).addClass("card-added")
 }
 
-var newsTitle=['News 1','News 2'];
-var newsContent=['Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt maxime aut doloremque autem similique ratione libero quia, perspiciatis, quae harum iste tempore non quisquam dolorum labore corrupti voluptatibus, provident at.Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt maxime aut doloremque autem similique ratione libero quia, perspiciatis, quae harum iste tempore non quisquam dolorum labore corrupti voluptatibus, provident at.','Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt maxime aut doloremque autem similique ratione libero quia, perspiciatis, quae harum iste tempore non quisquam dolorum labore corrupti voluptatibus, provident at.']
-var newsImage=['banner19.jpg','banner20.jpg']
+var newsTitle=['Reid gets tiktok','Opening of the month'];
+var newsContent=['We are now on TikTok! The social media platform is experiencing a real hype and we want to prove that fashion means more than just clothes. Find out more here and become part of our community!','On Thursday, August 19, 2021, we are celebrating a great opening party! 3 new stores in Belgrade, Amsterdam and Paris. We are expecting you at the opening. Big discounts are waiting for you! Stores Locations : Belgrade - Bulevar Kralja Aleksandra 55, Amsterdam : Leidsestraat 7, Paris : 62 Rue Bonaparte']
+var newsImage=['tiktok.png','opening.jpg']
 function getNews(){
 
     let print=''
 
     for(let i=0;i<newsTitle.length;i++){
         print+=`<div class="col-12 my-4 d-flex justify-content-around flex-wrap">
-                    <div class="col-10 col-md-6"><img class="img-fluid" src="assets/images/${newsImage[i]}" alt="${newsTitle[i]}"/></div>
+                    <div class="col-10 col-md-6 my-2"><img class="img-fluid" src="assets/images/${newsImage[i]}" alt="${newsTitle[i]}"/></div>
                     <div class="col-10 col-md-6">
-                        <h3>${newsTitle[i]}</h3>
+                        <h3 class="text-uppercase">${newsTitle[i]}</h3>
                         <p class="mt-5" data-id="${i}">${newsContent[i].substring(0,150)}... <a href="#" class="news-more text-decoration-none">Read more</a></p>
                     </div>
                 </div>`
@@ -314,13 +320,13 @@ if(url.indexOf("index.html")!=-1){
 }
 
 
-if(url.indexOf("man.html")!=-1){
+if(url.indexOf("men.html")!=-1){
     printProducts(menProducts,menProductsImages,menProductsPrices,menProductsOldPrices,menProductRate)
 }
 
 
 
-if(url.indexOf("woman.html")!=-1){
+if(url.indexOf("women.html")!=-1){
     printProducts(womanProducts,womanProductsImages,womanProductsPrices,womanProductsOldPrices,womanProductRate)
 }
 
