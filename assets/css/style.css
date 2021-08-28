@@ -112,6 +112,9 @@ footer{
 .shadow-dark{
     box-shadow: 0px 0px 10px #ffffff;
 }
+.darkTheme .fa-toggle-on{
+    color: #000;
+}
 /* @keyframes myAnimation{
     0% {
         transform: rotateY(0deg);
