@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header id="header" class="d-flex justify-content-between flex-wrap p-3">
@@ -18,9 +19,20 @@
     </header>
     
     
-    <div id="best" class="py-5">
+    <div id="best" class="py-5 col-11 mx-auto">
         <h1 class="text-center py-5">Women</h1>
-        <div id="topProducts" class="d-flex justify-content-between flex-wrap px- my-4"></div>
+        <div class="col-12 d-flex justify-content-between flex-wrap my-2 px-2">
+            <div class="col-3">
+                <a href="#" data-id="col-6" class="text-dark fs-3 view"><i class="fas fa-dice-two"></i></a>
+                <a href="#" data-id="col-4" class="text-dark fs-3 view"><i class="fas fa-dice-three"></i></a>
+                <a href="#" data-id="col-3" class="text-dark fs-3 view"><i class="fas fa-dice-four"></i></a>
+            </div>
+            <div class="col-3" id="sumProducts">
+                <p class="fs-3" id="productsNumber"></p>
+            </div>
+        </div>
+        
+        <div id="topProducts" class="d-flex justify-content-between flex-wrap my-4"></div>
     </div>
 
 

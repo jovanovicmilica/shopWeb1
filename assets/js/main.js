@@ -8,18 +8,31 @@ $(document).ready(function(){
 $(window).scroll(function(){
     if(window.pageYOffset>50){
         $("header").addClass("headerColor")
-        $("nav").addClass("headerColor")
+
         $("#backToTop").removeClass("d-none")
+
+        
+        if($("#themeToggle").hasClass("darkTheme")){
+            $("header").addClass("yellowTheme")
+
+        }
+        else{
+            $("header").addClass("headerColor")
+            $("header").removeClass("yellowTheme")
+        }
     }
     else{
-        $("header").removeClass("headerColor")
-        $("nav").removeClass("headerColor")
+        if($("nav").hasClass("d-none")){
+            $("header").removeClass("headerColor")
+            $("header").removeClass("yellowTheme")
+        }
+
         $("#backToTop").addClass("d-none")
     }
 })
 
 
-$("#scroll a").click(function() {
+$("#scroll a").on("click",function() {
     $("html, body").animate({ scrollTop: 0 }, "slow");
     return false;
 });
@@ -29,6 +42,7 @@ function getHeader(){
     let print=''
     print+=`<div id="Logo"><a class="text-decoration-none fw-bold text-secondary text-uppercase fs-3" href="index.html">Reid</a></div>
             <div class="d-flex align-items-center">
+                <a href="#" id="themeToggle"><i class="fas fa-toggle-on fs-2 mx-2"></i></a>
                 <a href="#" id="card"><i class="fas fa-shopping-cart fs-4 card-up mx-2"></i></a>
                 <a href="#" id="hamburger" class="hamburger text-secondary"><i class="fas fa-bars fs-4 mx-2"></i></a>
             </div>`
@@ -39,9 +53,66 @@ function getHeader(){
 
     getMenu()
 
-    $("#hamburger").click(showMenu)
+    $("#hamburger").on("click",showMenu)
+
+    $("#themeToggle").on("click",themeToggle)
 }
 
+function themeToggle(e){
+    e.preventDefault()
+    if($("#themeToggle").hasClass("darkTheme")){
+        ///remove dark
+        $("#themeToggle").removeClass("darkTheme")
+
+        
+        $("#themeToggle").removeClass("darkTheme")
+        $("body").removeClass("bg-dark")
+        $("p").removeClass("text-light")
+        $("h1").removeClass("text-light")
+        $("h2").removeClass("text-light")
+        $("h3").removeClass("text-light")
+        $("footer").removeClass("yellowTheme")
+        $("label").removeClass("text-light")
+        // $("#best a i").removeClass("text-light")
+        $(".form-control").removeClass("text-light")
+
+        $("#slider h1").addClass("text-light")
+        $("#slider p").addClass("text-light")
+        // $(".old-price").addClass("text-danger")
+
+        $("nav").removeClass("yellowTheme")
+        $("header").removeClass("yellowTheme")
+
+        $(".view i").removeClass("text-light")
+    }
+    else{
+        ///add dark
+        $("#themeToggle").addClass("darkTheme")
+        $("body").addClass("bg-dark")
+        $("p").not($(".old-price")).not($(".text-success")).addClass("text-light")
+        $("h1").addClass("text-light")
+        $("h2").addClass("text-light")
+        $("h3").addClass("text-light")
+        $("footer").addClass("yellowTheme")
+        // $("#best a i").addClass("text-light")
+        $("nav").addClass("yellowTheme")
+        $("label").addClass("text-light")
+        $(".form-control").addClass("text-light")
+
+        $("#slider h1").removeClass("text-light")
+        $("#slider p").removeClass("text-light")
+        // $(".old-price").removeClass("text-light")
+        $(".view i").addClass("text-light")
+
+        if(!$("nav").hasClass("d-none")){
+            $("header").addClass("yellowTheme")
+        }
+
+        if(window.pageYOffset>50){
+            $("header").addClass("yellowTheme")
+        }
+    }
+}
 
 function getMenu(){
     var menuNames=['Home','Men','Women','About','Contact','Author']
@@ -99,14 +170,26 @@ function showMenu(e){
     if($("nav").hasClass("d-none")){
         $("nav").removeClass("d-none")
         $("#hamburger").html(`<i class="fas fa-times fs-4 mx-2"></i>`)
-        $("header").addClass("headerColor")
-        $("nav").addClass("headerColor")
+
+        if($("#themeToggle").hasClass("darkTheme")){
+            $("nav").addClass("yellowTheme")
+            $("header").addClass("yellowTheme")
+
+
+            $("nav").removeClass("headerColor")
+            $("header").removeClass("headerColor")
+        }
+        else{
+            $("nav").addClass("headerColor")
+            $("header").addClass("headerColor")
+        }
     }
     else{
         $("nav").addClass("d-none")
         $("#hamburger").html(`<i class="fas fa-bars fs-4 mx-2"></i>`)
         $("header").removeClass("headerColor")
         $("nav").removeClass("headerColor")
+        $("header").removeClass("yellowTheme")
     }
 }
 
@@ -186,10 +269,10 @@ function printProducts(products,productsImages,productsPrices,oldPrices,productR
 
     for(let i=0;i<products.length;i++){
         print+=`<div class="col-6 col-md-3 px-4 my-3 product">
-                <div class="my-2"><img class="img-fluid" src="assets/images/${productsImages[i]}"/></div>
+                <div class="my-2 text-center"><img class="img-fluid" src="assets/images/${productsImages[i]}"/></div>
                 <p class="productName">${products[i]}</p>`
                 if(oldPrices[i]!=null){
-                    print+=`<p class="text-decoration-line-through me-5 text-danger">${oldPrices[i]} $</p>`
+                    print+=`<p class="old-price text-decoration-line-through me-5 text-danger">${oldPrices[i]} $</p>`
                 }
                 else{
                     print+=`<p>&nbsp;</p>`
@@ -211,15 +294,22 @@ function printProducts(products,productsImages,productsPrices,oldPrices,productR
 
     $("#topProducts").html(print)
 
-    
+    $("#productsNumber").html(products.length)
 
-    $(".add-to-card").click(addToCard)
+    $(".add-to-card").on("click",addToCard)
 
     $(".product").hover(
         function(){
-        $(this).addClass("shadow")
+            if($("#themeToggle").hasClass("darkTheme")){
+                $(this).removeClass("shadow")
+                $(this).addClass("shadow-dark")
+            }
+            else{
+                $(this).addClass("shadow")
+            }
         },
         function(){
+            $(this).removeClass("shadow-dark")
             $(this).removeClass("shadow")
         })
 
@@ -256,7 +346,7 @@ function getNews(){
 
     $("#news-container").html(print)
 
-    $(".news-more").click(moreTextNews)
+    $(".news-more").on("click",moreTextNews)
 }
 function moreTextNews(e){
     e.preventDefault()
@@ -331,9 +421,21 @@ if(url.indexOf("women.html")!=-1){
 }
 
 
+if(url.indexOf("women.html")!=-1 || url.indexOf("men.html")!=-1){
+    $(".view").on("click",function(e){
+        e.preventDefault()
+        $(".product").removeClass("col-md-3")
+        $(".product").removeClass("col-md-2")
+        $(".product").removeClass("col-md-4")
+        $(".product").removeClass("col-6")
+        $(".product").removeClass("col-4")
+        $(".product").removeClass("col-3")
+        $(".product").addClass(this.dataset.id)
+    })
+}
 
 if(url.indexOf("contact.html")!=-1){
-    $("#btnSend").click(function(){
+    $("#btnSend").on("click",function(){
         $("#messageSuccess").removeClass("d-none")
         $("input").val("")
         $("textarea").val("")
