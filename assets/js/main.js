@@ -76,8 +76,8 @@ function themeToggle(e){
         // $("#best a i").removeClass("text-light")
         $(".form-control").removeClass("text-light")
 
-        $("#slider h1").addClass("text-light")
-        $("#slider p").addClass("text-light")
+        $("#slider h1").removeClass("text-light")
+        $("#slider p").removeClass("text-light")
         // $(".old-price").addClass("text-danger")
 
         $("nav").removeClass("yellowTheme")
